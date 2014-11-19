@@ -3,6 +3,9 @@
 namespace Drupal\example\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\example\CurrencyManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @Block(
@@ -11,7 +14,37 @@ use Drupal\Core\Form\FormStateInterface;
  *   category = @Translation("Example")
  * )
  */
-class ExampleBlock extends BlockBase {
+class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * @var \Drupal\example\CurrencyManager
+   */
+  protected $currencyManager;
+
+  /**
+   * Creates an instance of the plugin.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   The container to pull out services used in the plugin.
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   *
+   * @return static
+   *   Returns an instance of this plugin.
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $currency_manager = $container->get('plugin.manager.currency');
+    return new static($configuration, $plugin_id, $plugin_definition, $currency_manager);
+  }
+
+  public function __construct($configuration, $plugin_id, $plugin_definition, CurrencyManager $currency_manager) {
+    $this->currencyManager = $currency_manager;
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  }
 
   public function defaultConfiguration() {
     return array(
@@ -55,6 +88,8 @@ class ExampleBlock extends BlockBase {
    */
   public function build() {
 
+    var_dump($this->currencyManager);
+
     $row_count = $this->configuration['row_count'];
     $min = $this->configuration['range']['min'];
     $max = $this->configuration['range']['max'];
@@ -74,7 +109,10 @@ class ExampleBlock extends BlockBase {
       );
     }
 
-    return $table;
+    return array(
+      'table' => $table,
+
+    );
   }
 
 

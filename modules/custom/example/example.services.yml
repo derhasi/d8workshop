@@ -1,0 +1,4 @@
+services:
+  plugin.manager.currency:
+    class: 'Drupal\example\CurrencyManager'
+    parent: 'default_plugin_manager'
