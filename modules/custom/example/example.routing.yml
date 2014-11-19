@@ -2,7 +2,19 @@
 example.example:
   path: "/example"
   defaults:
+    _title: 'Title from yml'
+    _title_callback: '\Drupal\example\Controller\ExampleController::title'
     _content: '\Drupal\example\Controller\ExampleController::content'
   requirements:
     _permission: 'example.page.access'
 
+example.user:
+  path: "/example/user/{user}"
+  defaults:
+    _title_callback: '\Drupal\example\Controller\ExampleController::titleByUser'
+    _content: '\Drupal\example\Controller\ExampleController::contentByUser'
+  requirements:
+    _permission: 'example.page.access'
+    _access: 'FALSE'
+  options:
+    _access_mode: 'ANY'
