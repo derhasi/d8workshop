@@ -1,0 +1,8 @@
+
+example.example:
+  path: "/example"
+  defaults:
+    _content: '\Drupal\example\Controller\ExampleController::content'
+  requirements:
+    _permission: 'example.page.access'
+
