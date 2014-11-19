@@ -21,5 +21,14 @@ class CurrencyManager extends DefaultPluginManager {
     $this->setCacheBackend($cache_backend, 'currency_plugins');
   }
 
+  public function getOptions() {
+    $options = array();
+
+    foreach ($this->getDefinitions() as $plugin_id => $plugin_definition) {
+      $options[$plugin_id] = (string) $plugin_definition['title'];
+    }
+    return $options;
+  }
+
 
 }

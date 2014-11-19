@@ -48,6 +48,7 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
   public function defaultConfiguration() {
     return array(
+      'currency' => 'euro',
       'row_count' => 10,
       'range' => array(
         'min' => 0,
@@ -57,6 +58,13 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
   }
 
   public function blockForm($form, FormStateInterface $form_state) {
+    $form['currency'] = array(
+      '#type' => 'select',
+      '#title' => t('Currency'),
+      '#default_value' => $this->configuration['currency'],
+      '#options' => $this->currencyManager->getOptions(),
+    );
+
     $form['row_count'] = array(
       '#type' => 'number',
       '#title' => $this->t('Row count'),
@@ -88,8 +96,7 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    */
   public function build() {
 
-    var_dump($this->currencyManager);
-
+    $currency = $this->currencyManager->createInstance($this->configuration['currency']);
     $row_count = $this->configuration['row_count'];
     $min = $this->configuration['range']['min'];
     $max = $this->configuration['range']['max'];
@@ -104,7 +111,8 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
     for ($i = 1; $i <= $row_count; $i++) {
       $table[] = array(
-        array('#markup' => rand($min, $max)),
+        //@todo: check_plain
+        array('#markup' => rand($min, $max) . ' ' . $currency->getSymbol()),
         array('#markup' => $i),
       );
     }
