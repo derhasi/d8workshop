@@ -56,6 +56,33 @@ class Event extends ContentEntityBase {
       ))
       ->setDisplayConfigurable('form', TRUE);
 
+    $definitions['date'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Date'))
+      ->setDisplayOptions('form', array(
+        'weight' => 10,
+        'type' => 'datetime_datelist',
+        'settings' => array(
+          'increment' => '30',
+        ),
+      ))
+      ->setDisplayOptions('view', array(
+        'weight' => 10,
+        'settings' => array(
+          'format_type' => 'long',
+        ),
+      ))
+      ->setRequired('TRUE');
+
+    $definitions['location'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Location'))
+      ->setDescription(t('The place where the event takes place.'))
+      ->setDisplayOptions('form', array(
+        'weight' => 20,
+      ))
+      ->setDisplayOptions('view', array(
+        'weight' => 0,
+      ));
+
     return $definitions;
   }
 
