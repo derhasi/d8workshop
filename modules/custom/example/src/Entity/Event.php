@@ -23,13 +23,17 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *     "id" = "id",
  *     "uuid" = "uuid",
  *     "label" = "title",
+ *     "revision" = "revision_id",
  *   },
+ *   translatable = TRUE,
  *   links = {
  *     "canonical" = "entity.event.canonical",
  *     "add-form" = "entity.event.add_form",
  *   },
  *   base_table = "event",
- *   permission_granularity = "entity_type",
+ *   data_table = "event_field_data",
+ *   revision_table = "event_revision",
+ *   revision_data_table = "event_field_revision",
  * )
  */
 class Event extends ContentEntityBase {
@@ -45,6 +49,15 @@ class Event extends ContentEntityBase {
       ->setReadOnly(TRUE)
       ->setSetting('unsigned', TRUE);
 
+    $definitions['revision_id'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Revision ID'))
+      ->setReadOnly(TRUE)
+      ->setSetting('unsigned', TRUE);
+
+    $definitions['langcode'] = BaseFieldDefinition::create('language')
+      ->setLabel(t('Language'))
+      ->setRevisionable(TRUE);
+
     $definitions['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
       ->setReadOnly(TRUE);
@@ -59,7 +72,9 @@ class Event extends ContentEntityBase {
       ->setDisplayOptions('view', array(
         'weight' => 0,
       ))
-      ->setDisplayConfigurable('form', TRUE);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE);
 
     $definitions['date'] = BaseFieldDefinition::create('datetime')
       ->setLabel(t('Date'))
@@ -72,7 +87,8 @@ class Event extends ContentEntityBase {
           'format_type' => 'long',
         ),
       ))
-      ->setRequired('TRUE');
+      ->setRequired('TRUE')
+      ->setRevisionable(TRUE);
 
     $definitions['location'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Location'))
@@ -82,19 +98,24 @@ class Event extends ContentEntityBase {
       ))
       ->setDisplayOptions('view', array(
         'weight' => 0,
-      ));
+      ))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE);
 
     $definitions['description'] = BaseFieldDefinition::create('text_long')
       ->setLabel(t('Description'))
       ->setDisplayOptions('form', array('weight' => 30))
-      ->setDisplayOptions('view', array('weight' => 30));
+      ->setDisplayOptions('view', array('weight' => 30))
+      ->setTranslatable(TRUE)
+      ->setRevisionable(TRUE);
 
     $definitions['participants'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Participants'))
       ->setSetting('target_type', 'user')
       ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
       ->setDisplayOptions('form', array('weight' => 40))
-      ->setDisplayOptions('view', array('weight' => 40));
+      ->setDisplayOptions('view', array('weight' => 40))
+      ->setRevisionable(TRUE);
 
 
     return $definitions;
