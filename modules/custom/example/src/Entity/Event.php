@@ -17,6 +17,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *       "add" = "Drupal\example\Form\EventForm",
  *     },
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   entity_keys = {
  *     "id" = "id",
