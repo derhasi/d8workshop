@@ -12,7 +12,7 @@ class EventAccessControlHandler extends EntityAccessControlHandler {
 
 
   protected function checkAccess(EntityInterface $entity, $operation, $langcode, AccountInterface $account) {
-    if ($operation == 'view') {
+    if ($operation == 'view' || $operation == 'update') {
       return AccessResult::allowedIfHasPermission($account, 'event.view');
     }
 

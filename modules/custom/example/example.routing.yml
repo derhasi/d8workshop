@@ -32,3 +32,10 @@ entity.event.canonical:
     _entity_view: 'event'
   requirements:
     _entity_access: 'event.view'
+
+entity.event.edit:
+  path: "/event/{event}/edit"
+  defaults:
+    _entity_form: 'event.edit'
+  requirements:
+    _entity_access: 'event.update'

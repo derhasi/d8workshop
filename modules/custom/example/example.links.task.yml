@@ -7,3 +7,8 @@ example.event.add:
   route_name: entity.event.add_form
   title: 'Add event'
   base_route: entity.event.canonical
+
+example.event.edit:
+  route_name: entity.event.edit
+  title: 'Edit event'
+  base_route: entity.event.canonical

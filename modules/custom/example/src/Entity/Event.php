@@ -14,7 +14,9 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   handlers = {
  *     "access" = "Drupal\example\EventAccessControlHandler",
  *     "form" = {
+ *       "default" = "Drupal\example\Form\EventForm",
  *       "add" = "Drupal\example\Form\EventForm",
+ *       "edit" = "Drupal\example\Form\EventForm",
  *     },
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
