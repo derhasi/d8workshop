@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Register new entity type.
+ */
+function example_update_8001() {
+  $entity_manager =\Drupal::entityManager();
+  $entity_type = $entity_manager->getDefinition('event');
+  $entity_manager->onEntityTypeCreate($entity_type);
+}
