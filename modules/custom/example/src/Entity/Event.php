@@ -23,6 +23,10 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "uuid" = "uuid",
  *     "label" = "title",
  *   },
+ *   links = {
+ *     "canonical" = "entity.event.canonical",
+ *     "add-form" = "entity.event.add_form",
+ *   }
  *   base_table = "event",
  *   permission_granularity = "entity_type",
  * )
