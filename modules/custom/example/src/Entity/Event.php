@@ -3,8 +3,8 @@
 namespace Drupal\example\Entity;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Field\Annotation\FieldType;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 
 /**
@@ -26,7 +26,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   links = {
  *     "canonical" = "entity.event.canonical",
  *     "add-form" = "entity.event.add_form",
- *   }
+ *   },
  *   base_table = "event",
  *   permission_granularity = "entity_type",
  * )
@@ -64,10 +64,6 @@ class Event extends ContentEntityBase {
       ->setLabel(t('Date'))
       ->setDisplayOptions('form', array(
         'weight' => 10,
-        'type' => 'datetime_datelist',
-        'settings' => array(
-          'increment' => '30',
-        ),
       ))
       ->setDisplayOptions('view', array(
         'weight' => 10,
@@ -86,6 +82,19 @@ class Event extends ContentEntityBase {
       ->setDisplayOptions('view', array(
         'weight' => 0,
       ));
+
+    $definitions['description'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Description'))
+      ->setDisplayOptions('form', array('weight' => 30))
+      ->setDisplayOptions('view', array('weight' => 30));
+
+    $definitions['participants'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Participants'))
+      ->setSetting('target_type', 'user')
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setDisplayOptions('form', array('weight' => 40))
+      ->setDisplayOptions('view', array('weight' => 40));
+
 
     return $definitions;
   }
