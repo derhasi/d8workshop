@@ -14,8 +14,9 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   handlers = {
  *     "access" = "Drupal\example\EventAccessControlHandler",
  *     "form" = {
- *       "add" = "Drupal\Core\Entity\ContentEntityForm",
- *     }
+ *       "add" = "Drupal\example\Form\EventForm",
+ *     },
+ *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *   },
  *   entity_keys = {
  *     "id" = "id",
@@ -48,6 +49,9 @@ class Event extends ContentEntityBase {
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', array(
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('view', array(
         'weight' => 0,
       ))
       ->setDisplayConfigurable('form', TRUE);
