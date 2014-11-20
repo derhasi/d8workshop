@@ -1,0 +1,9 @@
+example.event.view:
+  route_name: entity.event.canonical
+  title: 'View event'
+  base_route: entity.event.canonical
+
+example.event.add:
+  route_name: entity.event.add_form
+  title: 'Add event'
+  base_route: entity.event.canonical
