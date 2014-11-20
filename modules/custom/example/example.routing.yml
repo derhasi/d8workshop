@@ -18,3 +18,10 @@ example.user:
     _access: 'FALSE'
   options:
     _access_mode: 'ANY'
+
+entity.event.add_form:
+  path: "/example/event/add"
+  defaults:
+    _entity_form: 'event.add'
+  requirements:
+    _entity_create_access: 'event'

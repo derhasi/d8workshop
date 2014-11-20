@@ -12,13 +12,18 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   id = "event",
  *   label = @Translation("Event"),
  *   handlers = {
+ *     "access" = "Drupal\example\EventAccessControlHandler",
+ *     "form" = {
+ *       "add" = "Drupal\Core\Entity\ContentEntityForm",
+ *     }
  *   },
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",
  *     "label" = "title",
  *   },
- *   base_table = "event"
+ *   base_table = "event",
+ *   permission_granularity = "entity_type",
  * )
  */
 class Event extends ContentEntityBase {
@@ -41,7 +46,7 @@ class Event extends ContentEntityBase {
     $definitions['title'] = BaseFieldDefinition::create('string')
       ->setLabel('Title')
       ->setRequired(TRUE)
-      ->setSettings('max_length', 255);
+      ->setSetting('max_length', 255);
 
     return $definitions;
   }
