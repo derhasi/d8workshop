@@ -31,12 +31,22 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   links = {
  *     "canonical" = "entity.event.canonical",
  *     "add-form" = "entity.event.add_form",
+ *     "edit-form" = "entity.event.edit",
  *   },
  *   base_table = "event",
  *   data_table = "event_field_data",
  *   revision_table = "event_revision",
  *   revision_data_table = "event_field_revision",
+ *   permission_granularity = "entity_type",
  * )
+ *
+ * For Translation:
+ * - Language module enabled
+ * - Content Translation enabled
+ * - Second Language created
+ * - Translation enabled for Event: see admin/config/regional/content-language
+ * ... then you can navigate to event/.../translations
+ *
  */
 class Event extends ContentEntityBase {
 
