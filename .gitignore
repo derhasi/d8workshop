@@ -1,0 +1,23 @@
+# OS specific temporary files
+.DS_Store*
+ehthumbs.db
+Thumbs.db
+# IDEs
+.buildpath
+.idea
+.project
+.settings
+*.esproj
+*.komodoproject
+*.komodotools
+nbproject
+# Tools
+.svn
+.sass-cache
+# Drupal specifics
+sites/*/files
+sites/*/local.settings.php
+sites/default/services.yml
+sites/default/settings.local.php
+sites/default/settings.php
+sites/default/development.services.yml
