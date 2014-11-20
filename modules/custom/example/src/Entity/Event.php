@@ -17,7 +17,8 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "id" = "id",
  *     "uuid" = "uuid",
  *     "label" = "title",
- *   }
+ *   },
+ *   base_table = "event"
  * )
  */
 class Event extends ContentEntityBase {
