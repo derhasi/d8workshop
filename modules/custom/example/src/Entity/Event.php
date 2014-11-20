@@ -46,7 +46,11 @@ class Event extends ContentEntityBase {
     $definitions['title'] = BaseFieldDefinition::create('string')
       ->setLabel('Title')
       ->setRequired(TRUE)
-      ->setSetting('max_length', 255);
+      ->setSetting('max_length', 255)
+      ->setDisplayOptions('form', array(
+        'weight' => 0,
+      ))
+      ->setDisplayConfigurable('form', TRUE);
 
     return $definitions;
   }
