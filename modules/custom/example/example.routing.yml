@@ -20,8 +20,15 @@ example.user:
     _access_mode: 'ANY'
 
 entity.event.add_form:
-  path: "/example/event/add"
+  path: "/event/add"
   defaults:
     _entity_form: 'event.add'
   requirements:
     _entity_create_access: 'event'
+
+entity.event.canonical:
+  path: "/event/{event}"
+  defaults:
+    _entity_view: 'event'
+  requirements:
+    _entity_access: 'event.view'

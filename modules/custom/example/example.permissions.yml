@@ -1,2 +1,3 @@
 example.page.access: "Access example page"
 example.event.add: "Add event in example module"
+example.event.view: "View an existing event"
